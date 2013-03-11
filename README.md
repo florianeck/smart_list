@@ -19,16 +19,25 @@ Its kinda similar to acts_as_list, but it does the following things (better in m
 
 You have the following data in your user stuff table:
 
-id    user_id   some_data     order_bit
-1     1         'bli'         100
-2     2         'bla'         100
-3     3         'blubb'       100
-4     1         'blibla'      101
-5     1         'blubbblubb'  102
-6     1         'abc'         103
-7     2         'blubbbla'    101
-8     3         'def'         101
-
+<table>
+  <thead>
+    <th>
+      <td>id</td>
+      <td>user_id</td>
+      <td>some_date</td>
+      <td><%= order_bit %></td>
+    </th>
+  </thead>
+  <tr><td>1</td><td>1</td><td>'bli'       </td><td>  100</td></tr>
+  <tr><td>2</td><td>2</td><td>'bla'       </td><td>  100</td></tr>
+  <tr><td>3</td><td>3</td><td>'blubb'     </td><td>  100</td></tr>
+  <tr><td>4</td><td>1</td><td>'blibla'    </td><td>  101</td></tr>
+  <tr><td>5</td><td>1</td><td>'blubbblubb'</td><td>  102</td></tr>
+  <tr><td>6</td><td>1</td><td>'abc'       </td><td>  103</td></tr>
+  <tr><td>7</td><td>2</td><td>'blubbbla'  </td><td>  101</td></tr>
+  <tr><td>8</td><td>3</td><td>'def'       </td><td>  101</td></tr>
+  
+</table>
 
 Now u can do:
 
