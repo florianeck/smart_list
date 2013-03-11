@@ -2,7 +2,10 @@
 
 require "smart_list"
 require "add_order_bit"
+require "smart_list_helper"
+require "digest/sha1"
 
+$active_smart_lists = {}
 
 module SmartList
   
@@ -21,6 +24,8 @@ module SmartList
         unless is_smart_list?
           cattr_accessor :group_col, :order_bit_name, :base_class, :fixed_list
           send :include, InstanceMethods
+
+          $active_smart_lists.merge!(Digest::SHA1.hexdigest(self.name) => self.name)
         end  
         self.send(:default_scope, :order => "#{options[:order_bit].to_s} ASC")
         self.send(:before_create, :set_order_bit)
@@ -176,8 +181,21 @@ module SmartList
         self.base_class.find_by_sql("SELECT * from #{self.base_class.table_name} where #{self.base_class.order_bit_name} #{options[:include_self] == true ? '<=' : '<'} #{self.order_bit} and #{self.base_class.group_col.to_s} = '#{self.group_name}'")    
       end    
     end
+    
+    def class_name_sha
+      Digest::SHA1.hexdigest(self.class.name)
+    end  
+      
   end    
-        
+  
+  class Engine < Rails::Engine      
+  end
+  
+  SmartList::Engine.routes.draw do
+    get "/smart_list/move_up/:type/:id",      :controller => "smart_list", :action => "move_up" 
+    get "/smart_list/move_down/:type/:id",    :controller => "smart_list", :action => "move_down"
+  end
+    
 
 end  
 
