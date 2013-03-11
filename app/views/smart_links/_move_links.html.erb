@@ -1,0 +1,7 @@
+<span class="smart-up">
+
+  <%= link_to ((options[:uplink][:text] rescue "<")), {:controller => "/smart_list", :action => "move_up", :id => item.id, :type => item.base_class.to_s}, :class => ((options[:uplink][:class] rescue nil)) %>
+</span>
+<span class="smart-down">
+  <%= link_to ((options[:downlink][:text] rescue ">")), {:controller => "/smart_list", :action => "move_down", :id => item.id, :type => item.base_class.to_s}, :class => ((options[:downlink][:class] rescue nil)) %>
+</span>
